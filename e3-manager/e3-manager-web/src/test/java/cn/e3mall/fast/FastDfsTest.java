@@ -7,6 +7,8 @@ import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 import org.junit.Test;
 
+import cn.e3mall.common.utils.FastDFSClient;
+
 public class FastDfsTest {
 	
 		@Test
@@ -27,5 +29,12 @@ public class FastDfsTest {
 			for (String string : strings) {
 				System.out.println(string);
 			}
+		}
+		
+		@Test
+		public void testFastDfsClient() throws Exception{
+			FastDFSClient fastDFSClient = new FastDFSClient("D:/java/github/e3-manager/e3-manager-web/src/main/resources/conf/client.conf");
+			String string = fastDFSClient.uploadFile("F:/gg/newsArticle_files/201705230071495516496258.jpg");
+			System.out.println(string);
 		}
 }
