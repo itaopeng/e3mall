@@ -1,5 +1,6 @@
 package cn.e3mall.common.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 淘淘商城自定义响应结构
  */
-public class E3Result {
+public class E3Result implements Serializable{
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();

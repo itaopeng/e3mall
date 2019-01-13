@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.common.utils.IDUtils;
+import cn.e3mall.mapper.TbItemDescMapper;
 import cn.e3mall.mapper.TbItemMapper;
 import cn.e3mall.pojo.TbItem;
 import cn.e3mall.pojo.TbItemDesc;
@@ -31,6 +32,8 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private TbItemMapper itemMapper;
+	@Autowired
+	private TbItemDescMapper ibItemDescMapper;
 	
 	@Override
 	public TbItem getItemById(long itemId) {
@@ -66,7 +69,6 @@ public class ItemServiceImpl implements ItemService {
 		return result;
 	}
 
-	@Override
 	public E3Result addItem(TbItem item, String desc) {
 		// 生成商品id
 		long itemId = IDUtils.genItemId();
@@ -83,8 +85,51 @@ public class ItemServiceImpl implements ItemService {
 		// 补全属性
 		itemDesc.setItemId(itemId);
 		itemDesc.setItemDesc(desc);
+		itemDesc.setCreated(new Date());
+		itemDesc.setUpdated(new Date());
 		// 向商品描述表插入数据
+		ibItemDescMapper.insertSelective(itemDesc);
 		// 返回成功
-		return null;
+		return E3Result.ok();
 	}
+	@Override
+	public E3Result updateItem(TbItem item, TbItemDesc itemDesc) {
+		item.setUpdated(new Date());
+		itemMapper.updateByPrimaryKey(item);
+		// 向商品描述表插入数据
+		itemDesc.setUpdated(new Date());
+		ibItemDescMapper.updateByPrimaryKey(itemDesc);
+		// 返回成功
+		return E3Result.ok();
+	}
+
+	@Override
+	public E3Result upItem(TbItem item) {
+		// 1-正常，2-下架，3-删除
+		item.setStatus((byte) 1);
+		itemMapper.updateByPrimaryKey(item);
+		// 返回成功
+		return E3Result.ok();
+	}
+
+	@Override
+	public E3Result downItem(TbItem item) {
+		// 1-正常，2-下架，3-删除
+		item.setStatus((byte) 2);
+		itemMapper.updateByPrimaryKey(item);
+		// 返回成功
+		return E3Result.ok();
+	}
+
+	@Override
+	public E3Result deleteItem(TbItem item) {
+		// 1-正常，2-下架，3-删除
+		item.setStatus((byte) 3);
+		itemMapper.updateByPrimaryKey(item);
+		// 返回成功
+		return E3Result.ok();
+	}
+
+	
+	
 }
