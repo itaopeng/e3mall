@@ -14,11 +14,12 @@ import cn.e3mall.pojo.TbContentCategoryExample;
 import cn.e3mall.pojo.TbContentCategoryExample.Criteria;
 
 
-/**
- * 内容分类管理service
+
+/***
+ * 内容分类管理Service
  * @author tao
  *
- */
+ */	
 @Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
@@ -27,23 +28,24 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 	
 	@Override
 	public List<EasyUITreeNode> getContentCatList(long parentId) {
-		//根据parentId 查询子节点列表
+		// 根据parentId查询子节点列表
 		TbContentCategoryExample example = new TbContentCategoryExample();
 		Criteria criteria = example.createCriteria();
 		//设置查询条件
 		criteria.andParentIdEqualTo(parentId);
-		//执行查询
+		//查询
 		List<TbContentCategory> catList = contentCategoryMapper.selectByExample(example);
 		//转换成EasyUITreeNode的列表
-		List<EasyUITreeNode> nodeList = new ArrayList<>();
+		List<EasyUITreeNode> nodeList = new ArrayList<EasyUITreeNode>();
 		for (TbContentCategory tbContentCategory : catList) {
 			EasyUITreeNode node = new EasyUITreeNode();
 			node.setId(tbContentCategory.getId());
 			node.setText(tbContentCategory.getName());
 			node.setState(tbContentCategory.getIsParent()?"closed":"open");
-			//添加到列表
+			//
 			nodeList.add(node);
 		}
 		return nodeList;
 	}
+
 }
