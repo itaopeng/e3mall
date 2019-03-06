@@ -80,8 +80,9 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
 	@Override
 	public void deleteContentCategory(long id) {
+		TbContentCategory content = contentCategoryMapper.selectByPrimaryKey(id);
 		contentCategoryMapper.deleteByPrimaryKey(id);
-		TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(id);
+		TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(content.getParentId());
 		TbContentCategoryExample contentCategoryExample = new TbContentCategoryExample();
 		Criteria criteria = contentCategoryExample.createCriteria();
 		criteria.andParentIdEqualTo(parent.getId());
@@ -95,6 +96,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 	@Override
 	public void updateContentCategory(long id, String name) {
 		TbContentCategory contentCategory = new TbContentCategory();
+		contentCategory.setId(id);
 		contentCategory.setName(name);
 		contentCategoryMapper.updateByPrimaryKeySelective(contentCategory);
 	}
