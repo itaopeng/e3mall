@@ -13,15 +13,15 @@
 		<property name="jedisPool" ref="jedisPool"></property>
 	</bean>
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg name="host" value="192.168.25.133"></constructor-arg>
-		<constructor-arg name="port" value="6379"></constructor-arg>
+		<constructor-arg name="host" value="192.168.25.133" />
+		<constructor-arg name="port" value="6379" />
 	</bean> -->
 	
 	<!-- 连接redis集群版 -->
 	<bean id="jedisClientPool" class="cn.e3mall.common.jedis.JedisClientCluster">
 		<property name="jedisCluster" ref="jedisCluster" />
 	</bean>
-	<bean id="jedisClient" class="redis.clients.jedis.JedisCluster">
+	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
 		<constructor-arg>
 			<set>
 				<bean class="redis.clients.jedis.HostAndPort.HostAndPort">
