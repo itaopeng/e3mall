@@ -39,6 +39,9 @@ public class ContentServiceImpl implements ContentService {
 		content.setCreated(new Date());
 		content.setUpdated(new Date());
 		contentMapper.insert(content);
+		//缓存同步，删除缓存数据 
+		content.getCategoryId();
+		jedisClient.hdel(CONTENT_LIST, content.getCategoryId().toString());
 		return E3Result.ok();
 	}
 	

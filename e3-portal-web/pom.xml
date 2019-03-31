@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>e3-manager-web</artifactId>
 	<packaging>war</packaging>
-	<dependencies>
+	<dependencies> 
 		<dependency>
 			<groupId>cn.e3mall</groupId>
 			<artifactId>e3-content-interface</artifactId>
