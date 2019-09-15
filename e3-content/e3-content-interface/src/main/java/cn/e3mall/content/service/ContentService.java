@@ -8,5 +8,6 @@ import cn.e3mall.pojo.TbContent;
 public interface ContentService {
 	
 	E3Result addContent(TbContent content);
+	E3Result updateContent(TbContent content);
 	List<TbContent> getContentByCid(long cid);
 }

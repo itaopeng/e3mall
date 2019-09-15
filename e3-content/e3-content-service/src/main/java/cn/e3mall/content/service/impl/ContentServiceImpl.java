@@ -76,4 +76,14 @@ public class ContentServiceImpl implements ContentService {
 		return list;
 	}
 
+	@Override
+	public E3Result updateContent(TbContent content) {
+		// 将内容数据插入到内容表
+		content.setUpdated(new Date());
+		contentMapper.updateByPrimaryKey(content);
+		//缓存同步，删除缓存数据 
+		content.getCategoryId();
+		jedisClient.hdel(CONTENT_LIST, content.getCategoryId().toString());
+		return E3Result.ok();
+	}
 }
