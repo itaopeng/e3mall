@@ -33,8 +33,8 @@ public class FastDfsTest {
 		
 		@Test
 		public void testFastDfsClient() throws Exception{
-			FastDFSClient fastDFSClient = new FastDFSClient("D:/java/github/e3-manager/e3-manager-web/src/main/resources/conf/client.conf");
-			String string = fastDFSClient.uploadFile("F:/gg/newsArticle_files/201705230071495516496258.jpg");
+			FastDFSClient fastDFSClient = new FastDFSClient("E:/githome/e3mall/e3-manager/e3-manager-web/src/main/resources/conf/client.conf");
+			String string = fastDFSClient.uploadFile("F:/11.png");
 			System.out.println(string);
 		}
 }
