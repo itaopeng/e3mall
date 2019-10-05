@@ -3,7 +3,7 @@
 	 <a class="easyui-linkbutton" onclick="importItems()">一键导入商品数据到索引库</a>
 </div>
 <script type="text/javascript">
-	function importItems() {
+	function importItems() { 
 		$.post("/index/item/import",null,function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','导入索引库成功！');
