@@ -22,7 +22,7 @@ public class TestSolrJ {
 		SolrInputDocument document = new SolrInputDocument();
 		//向文档对象中添加域。文档中必须包含一个id域，所有的域的名称必须在schema.xml中定义。
 		document.addField("id", "doc01");
-		document.addField("item_title", "测试商品01");
+		document.addField("item_title", "测试商品tp");
 		document.addField("item_price", 1000);
 		//把文档写入索引库
 		solrServer.add(document);

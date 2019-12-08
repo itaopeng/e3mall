@@ -53,7 +53,6 @@ public class SearchItemServiceImpl implements SearchItemService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return E3Result.build(500, "数据导入时发生异常");
-					
 		}
 	}
 
