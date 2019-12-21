@@ -9,6 +9,7 @@ import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cn.e3mall.common.pojo.SearchItem;
@@ -24,7 +25,8 @@ import cn.e3mall.common.pojo.SearchResult;
 
 @Repository
 public class SearchDao {
-
+	
+	@Autowired
 	private SolrServer solrServer;
 	
 	/***
