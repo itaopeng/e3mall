@@ -1,11 +1,9 @@
 package cn.e3mall.search.service.impl;
 
-import java.awt.Color;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 
 import cn.e3mall.common.pojo.SearchResult;
@@ -22,7 +20,7 @@ import cn.e3mall.search.service.SearchService;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-	@Autowired SearchDao SearchDao;
+	@Autowired SearchDao searchDao;
 	
 	@Autowired SolrServer solrServer;
 	
@@ -43,9 +41,15 @@ public class SearchServiceImpl implements SearchService {
 		query.setHighlightSimplePre("<em style=\"color:red\">");
 		query.setHighlightSimplePost("</em>");
 		//调用dao查询
-		
+		SearchResult searchResult = searchDao.search(query);
+		//计算总页数
+		long recordCount = searchResult.getRecordCount();
+		int totalPage = (int) (recordCount/rows);
+		if(recordCount % rows > 0) 
+			totalPage++;
+		//添加到返回结果
+		searchResult.setTotalPages(totalPage);
 		//封装
-		return null;
+		return searchResult;
 	}
-
 }
