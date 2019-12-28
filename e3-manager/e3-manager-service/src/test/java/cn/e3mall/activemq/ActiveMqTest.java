@@ -60,7 +60,7 @@ public class ActiveMqTest {
 		//创建一个session对象
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);//false(事务，一般为false); 自动发送或手动发送  
 		//使用session对象  创建一个destination 对象  两种形式queue topic，现在应该用queue
-		Queue queue = session.createQueue("test-queue");
+		Queue queue = session.createQueue("spring-queue");
 		//使用session 创建Consumer 对象
 		MessageConsumer consumer = session.createConsumer(queue);
 		// 接收消息
