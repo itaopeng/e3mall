@@ -8,6 +8,7 @@ import cn.e3mall.pojo.TbItemDesc;
 public interface ItemService {
 
 	TbItem getItemById(long itemId);
+	TbItemDesc getItemDescById(long itemId);
 	EasyUIDataGridResult getItemList(int page, int rows);
 	E3Result addItem(TbItem item,String desc);
 	E3Result updateItem(TbItem item,TbItemDesc itemDesc);

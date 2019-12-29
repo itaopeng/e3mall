@@ -152,6 +152,12 @@ public class ItemServiceImpl implements ItemService {
 		return E3Result.ok();
 	}
 
+	@Override
+	public TbItemDesc getItemDescById(long itemId) {
+		TbItemDesc itemDesc = ibItemDescMapper.selectByPrimaryKey(itemId);
+		return itemDesc;
+	}
+
 	
 	
 }
