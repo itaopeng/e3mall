@@ -19,7 +19,7 @@ public class ItemController {
 	
 	
 	@RequestMapping("/item/{itemId}")
-	public String showItemInfo(@PathVariable long itemId,Model model){
+	public String showItemInfo(@PathVariable Long itemId,Model model){
 		TbItem tbItem = itemService.getItemById(itemId);
 		Item item = new Item(tbItem);
 		TbItemDesc itemDesc = itemService.getItemDescById(itemId);
