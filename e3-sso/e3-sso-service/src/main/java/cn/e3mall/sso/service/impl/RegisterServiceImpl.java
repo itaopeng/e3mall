@@ -1,9 +1,12 @@
 package cn.e3mall.sso.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.mapper.TbUserMapper;
@@ -41,5 +44,31 @@ public class RegisterServiceImpl implements RegisterService {
 		}
 		//如果没有返回true
 		return E3Result.ok(true);
+	}
+
+	@Override
+	public E3Result Register(TbUser tbUser) {
+		//数据有限性校验
+		if(StringUtils.isBlank(tbUser.getUsername()) || StringUtils.isBlank(tbUser.getPassword()) 
+				|| StringUtils.isBlank(tbUser.getPhone())){
+			return E3Result.build(400, "用户数据不完整，注册失败。");
+		}
+		// 1、用户名 2、手机号 3、电话
+		E3Result e3Result = checkDate(tbUser.getUsername(), 1);
+		if(!(boolean) e3Result.getData()){
+			return E3Result.build(400, "用户名被占用");
+		}
+		E3Result e3Result2 = checkDate(tbUser.getPhone(), 1);
+		if(!(boolean) e3Result2.getData()){
+			return E3Result.build(400, "用户名被占用");
+		}
+		//补全pojo
+		tbUser.setCreated(new Date());
+		tbUser.setUpdated(new Date());
+		//对password 进行MD5加密
+		String md5Pass = DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes());
+		tbUser.setPassword(md5Pass);
+		userMapper.insert(tbUser);
+		return E3Result.ok();
 	}
 }
